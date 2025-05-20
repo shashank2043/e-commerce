@@ -18,7 +18,6 @@ const Product = () => {
         setProductData(item);
         // console.log(item);
         setImage(item.image[0]);
-
         return null;
       }
     });
