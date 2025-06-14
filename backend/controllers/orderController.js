@@ -1,5 +1,5 @@
-import orderModel from "../models/orderModel";
-import userModel from "../models/userModel";
+import orderModel from "../models/orderModel.js";
+import userModel from "../models/userModel.js";
 
 // Placing orders using COD Method
 const placeOrder = async (req, res) => {
@@ -34,10 +34,27 @@ const placeOrderStripe = async (req, res) => {};
 const placeOrderRazorpay = async (req, res) => {};
 
 // All orders data for Admin Panel
-const allOrders = async (req, res) => {};
+const allOrders = async (req, res) => {
+    try {
+        const orders = await orderModel.find({})
+        res.json({success:true, orders})
+    } catch (error) {
+        console.log(error);
+        res.json({success:false, message: error.message})
+    }
+};
 
 // All orders data for Frontend
-const userOrders = async (req, res) => {};
+const userOrders = async (req, res) => {
+    try {
+        const {userId} = req.body
+        const orders = await orderModel.find({userId})
+        res.json({success: true, orders})
+    } catch (error) {
+        console.log(error);
+        res.json({success:false, message: error.message})
+    }
+};
 
 // Update order status from Admin panel
 const updateStatus = async (req, res) => {};
